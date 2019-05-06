@@ -45,7 +45,7 @@ router.post('/change',isLoggedIn, function (req, res){
   connection.query('UPDATE items SET ? WHERE item_id = '+id,data, function (err, resp) {
       if (err) throw err;
       // if there are no errors send an OK message.
-      req.flash('success','Update item Success')
+      req.flash('success_messages','Update item Success')
       res.redirect('/item/list');
     });
 })

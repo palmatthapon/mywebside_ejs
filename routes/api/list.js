@@ -33,7 +33,7 @@ router.get('/delete',isLoggedIn, (req, res) => {
 
         connection.query('DELETE FROM items WHERE item_id = ?', item_id, function (err, item) {
             if (err) throw err;
-            req.flash('success','delete success!')
+            req.flash('success_messages','delete success!')
             res.redirect("/item/list")
         });
 })

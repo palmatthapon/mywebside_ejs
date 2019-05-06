@@ -37,13 +37,13 @@ router.post('/auth', function(req, res) {
         req.session.user = results[0];
         res.redirect("/item/profile")
 			} else {
-        req.flash('error','Incorrect Username and/or Password!')
+        req.flash('error_messages','Incorrect Username and/or Password!')
         res.redirect("/item/login");
 			}			
 			res.end();
 		});
 	} else {
-    req.flash('error','Please enter Username and Password!')
+    req.flash('error_messages','Please enter Username and Password!')
     res.redirect("/item/login")
     res.end();;
 	}
