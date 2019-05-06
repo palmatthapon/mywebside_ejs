@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
 
   connection.query('SELECT * FROM items',function selectItem(err, results, fields) {
     if (err) throw err;
-    // if there are no errors send an OK message.
     res.render("index",{page:'Home', menuId:'home',items:results, user: req.session.user});
   });
 });
