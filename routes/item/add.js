@@ -57,7 +57,6 @@ router.post('/submit', isLoggedIn, upload.array('userPhoto',5),function (req, re
 
   connection.query('INSERT INTO items SET ?',createItem, function (err, resp) {
       if (err) throw err;
-      // if there are no errors send an OK message.
       req.flash('success','Uploading File Success')
       res.redirect('/item/list');
     });
