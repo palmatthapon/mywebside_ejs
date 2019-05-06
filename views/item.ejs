@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include partials/head %> 
+        <!-- load fontawesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <% include partials/menu %>
+
+        <div class="container-fluid">
+
+                <div class="jumbotron text-center">
+                    <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+        
+                    <p>Login or Register with:</p>
+        
+                    <a href="/item/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+                    <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+                </div>
+        
+        </div>
+
+        <% include partials/script %>
+    </body>
+</html>

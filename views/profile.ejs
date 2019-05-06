@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include partials/head %> 
+        <!-- load fontawesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+                body {
+                    padding-top: 80px;
+                }
+            </style>
+    </head>
+    <body>
+        <% include partials/menu %>
+
+        <div class="container">
+
+                <div class="page-header text-center">
+                    <h1><span class="glyphicon glyphicon-tower"></span> Profile Page</h1>
+                    <!--<a href="logout" class="btn btn-default btn-sm">Logout</a>-->
+                </div>
+        
+                <div class="row">
+        
+                    <!-- LOCAL INFORMATION -->
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <h3><span class="fa fa-user"></span> Local</h3>
+        
+                            <p>
+                                <strong>id</strong>:
+                                <%= user.username %><br>
+                                    <strong>email</strong>:
+                                    <%= user.email %><br>
+                                        <strong>password</strong>:
+                                        <%= user.password %>
+                            </p>
+        
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <div class="container-fluid">
+                        <div class="row">
+                            <h1>Item Function</h1>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <h2>
+                                <li>
+                                    <a href="/item/add">Add item</a>
+                                </li>
+                                <li>
+                                    <a href="/item/list">List item</a>
+                                </li>
+                            </h2>
+                        </div>
+                    </div>
+
+            </div>
+            
+        <% include partials/script %>
+    </body>
+</html>

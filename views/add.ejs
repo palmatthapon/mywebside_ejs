@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <% include partials/head %>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <!--
+    <style>
+        body {
+            padding-top: 80px;
+        }
+    </style>
+ -->
+</head>
+<body>
+<% include partials/menu %>
+
+<div class="main container">
+    <tr>
+        <div class="col-md-6 col-md-offset-3">
+            <h1 class="display-4 m-b-2">
+                    welcome to add item page
+            </h1>
+                <!--upload form-->
+                <form id="uploadForm" enctype="multipart/form-data" action="add/submit" method="post" >
+                    <div class="form-group">
+                        <label for="name1">
+                            Head:
+                        </label>
+                        <input class="form-control" id="name2" type="text" placeholder="name3" name="name4">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="pic1">
+                            Image1:        
+                        </label>
+                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <label for="pic2">
+                            Image2:        
+                        </label>
+                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <label for="pic3">
+                            Image3:        
+                        </label>
+                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <label for="pic4">
+                            Image4:        
+                        </label>
+                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <label for="pic5">
+                            Image5:        
+                        </label>
+                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                    </div>
+                    <div class="form-group">
+                        <label for="detail">
+                            Detail:       
+                        </label>
+                        <textarea class="form-control" name="detail" placeholder="detail" rows="5" style="width:100%; height:150px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">
+                            Weight:       
+                        </label>
+                        <input class="form-control" id="weight" type="number" placeholder="kg." name="weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">
+                            Price:       
+                        </label>
+                        <input class="form-control" id="price" type="number" placeholder="baht" name="price">
+                    </div>
+                    <div class="form-group">
+                            <label for="tag">
+                                Tag:       
+                            </label>
+                            <input class="form-control" id="tag" type="text" placeholder="tag" name="tag">
+                        </div>
+                    <button class="btn btn-primary " onclick="clicked(event)" type="submit" value="Upload" >
+                            Upload
+                    </button>
+                </form>
+        </div>
+            
+    </tr>
+</div>
+      
+<script>
+        function clicked(e)
+        {
+            if(!confirm('Are you sure?'))e.preventDefault();
+        }
+        </script>
+
+</body>
+<% include partials/script %>
+</html>
