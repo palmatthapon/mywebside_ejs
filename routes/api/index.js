@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 
-
 function isLoggedIn(req, res, next) {
   if (req.session.loggedin) {
     //response.send('Welcome back, ' + request.session.username + '!');
@@ -67,9 +66,6 @@ router.get('/logout',isLoggedIn, function (req, res, callback) {
     }
     callback(null, {'success': true, "message": "user logout successfully"});
 });
-
-
-
 
 router.use('/list', require('./list'))
 router.use('/add', require('./add'))

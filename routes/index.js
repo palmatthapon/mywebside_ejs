@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const route_api = require('./item')
+
+
+const route_api = require('./api')
 
 router.use('/item', route_api)
 

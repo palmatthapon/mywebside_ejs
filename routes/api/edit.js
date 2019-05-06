@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 
+
 function isLoggedIn(req, res, next) {
   if (req.session.loggedin) {
     return next();
@@ -21,29 +22,27 @@ router.get('/',isLoggedIn, (req, res) => {
         connection.query('SELECT * FROM items WHERE item_id = ?', item_id, function (err, item) {
             if (err) throw err;
             // if there are no errors send an OK message.
-            res.render("edit",{page:'Edit', menuId:'item-edit',item:item, user: req.session.user});
+            res.render("edit",{page:'Edit', menuId:'edititem',item:item, user: req.session.user});
         });
 })
 
 //ฟังก์ชั่นแก้ไข้ไอเทม
-router.post('/submit',isLoggedIn, function (req, res){
-
+router.post('/change',isLoggedIn, function (req, res){
   let mysql  = require('mysql');
-        let config = require('../../config');
-        let connection = mysql.createConnection(config);
+  let config = require('../../config');
+  let connection = mysql.createConnection(config);
 
-        var item_id = req.body.itemid;
-        console.log("id: "+item_id+" name: "+req.body.name4)
-
-  var createItem = {
-      name: req.body.name4,
+  let id = req.body.itemid;
+  
+  let data = {
+      name: req.body.name,
       detail: req.body.detail,
       weight: req.body.weight,
       price: req.body.price,
       tag: req.body.tag
      }
 
-  connection.query('UPDATE items SET ? WHERE item_id = '+item_id,createItem, function (err, resp) {
+  connection.query('UPDATE items SET ? WHERE item_id = '+id,data, function (err, resp) {
       if (err) throw err;
       // if there are no errors send an OK message.
       req.flash('success','Update item Success')

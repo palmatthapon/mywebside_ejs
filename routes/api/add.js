@@ -36,13 +36,13 @@ router.post('/submit', isLoggedIn, upload.array('userPhoto',5),function (req, re
   let config = require('../../config');
   let connection = mysql.createConnection(config);
 
-  var images = [];
+  let images = [];
 
   req.files.forEach(element => {
     images.push(element.originalname)
   });
 
-  var createItem = {
+  let item = {
       name: req.body.name4,
       pic1: images[0],
       pic2: images[1],
@@ -55,7 +55,7 @@ router.post('/submit', isLoggedIn, upload.array('userPhoto',5),function (req, re
       tag: req.body.tag
      }
 
-  connection.query('INSERT INTO items SET ?',createItem, function (err, resp) {
+  connection.query('INSERT INTO items SET ?',item, function (err, resp) {
       if (err) throw err;
       // if there are no errors send an OK message.
       req.flash('success','Uploading File Success')

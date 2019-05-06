@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 //end login
 
 app.use((req, res, next) => {
-  console.log("LOGGED: "+moment().format('LLLL')+" locate: "+moment.locale())
+  //console.log("LOGGED: "+moment().format('LLLL')+" locate: "+moment.locale())
   res.locals.message = req.flash();//for flash
   next()
 })
