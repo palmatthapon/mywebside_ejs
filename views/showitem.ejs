@@ -22,11 +22,21 @@
 <% if(itemShow[0].pic5!=null) { %>
     <% picList[4] = itemShow[0].pic5 } %>
 
-<div class="container-fluid" id="item-show">
+<div class="container-fluid word-wrap" id="item-show">
         <div class="container">
-            <h1> <%= itemShow[0].name %> </h1>
+            
+            <h1> 
+                <% if(itemShow[0].status==1){%>
+                  <div class="alert alert-danger text-center" role="alert">OUT OF STOCK</div>
+                <%}%>
+              <%= itemShow[0].name %> </h1>
+            
         </div>
         <div class="w3-content" style="max-width:600px">
+            <div class="thumbnail">
+                <% if(itemShow[0].status==1){%>
+                  <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="15%" height="15%"/>
+                <%}%>
                 <% for(var i=0; i < picList.length; i++) { %>
                     <% if(i==0) { %>
                         <img class="mySlides" src="/uploads/<%= picList[i] %>" style="width:100%">
@@ -34,21 +44,31 @@
                         <img class="mySlides" src="/uploads/<%= picList[i] %>" style="width:100%;display:none">
                     <% } %>
                 <% } %>
-              
+              </div>
                 <div class="w3-row-padding w3-section">
                         <% for(var i=0; i < picList.length; i++) { %>
                             <div class="w3-col s4">
-                                    <img class="demo w3-opacity" src="/uploads/<%= picList[i] %>"
+                                <% if(i==0) { %>
+                                    <img class="demo w3-opacity w3-opacity-off" src="/uploads/<%= picList[i] %>"
                                     style="width:100%;cursor:pointer" onclick="currentDiv('<%= i+1 %>')" >
+                                    <% } else { %>
+                                      <img class="demo w3-opacity " src="/uploads/<%= picList[i] %>"
+                                    style="width:100%;cursor:pointer" onclick="currentDiv('<%= i+1 %>')" >
+                                      <% } %>
                             </div>
                         <% } %>
                 </div>
         </div>
         <div class="container">
-                        <div class="">
+                        <div class="thumbnail">
                                 <h2> รายละเอียด: <%= itemShow[0].detail %> </h2>
                                 <h2> น้ำหนัก: <%= itemShow[0].weight %> kg. </h2>
                                 <h2> ราคา: <%= itemShow[0].price %> baht </h2>
+                                <p>Post: 
+                                    <script>
+                                        getDate('<%= itemShow[0].date %>');
+                                        </script>
+                                  </p>
                                 <button type="button" class="btn btn-default btn-lg">
                                         <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <%= itemShow[0].tag %>
                                 </button>
@@ -58,18 +78,26 @@
 </div>    
 
 
-<div class="container-fluid bg-3 text-center">
+<div class="container-fluid bg-3 text-center word-wrap">
     <h3 class="text-left">สินค้าอื่นๆที่ใกล้เคียง:</h3>
     <% for(var i=0; i < items.length; i++) { %>
       <div class="col-md-3 col-sm-6 col-xs-12">
-          <tr>
+          <div class="thumbnail">
                 <a href="/showitem?itemid=<%= items[i].item_id %>">
+                  <% if(items[i].status==1){%>
+                    <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="50%" height="50%"/>
+                  <%}%>
                     <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="100%" height="100%"/>
                   </a>
-              <td>
-                <a href="/showitem?itemid=<%= items[i].item_id %>"><h1><%= items[i].name %></h1></a>
-              </td>
-            </tr>
+                  <div class="caption">
+                    <a href="/showitem?itemid=<%= items[i].item_id %>"><h4><%= items[i].name %></h4></a>
+                    <p>Post: 
+                        <script>
+                            getDate('<%= items[i].date %>');
+                            </script>
+                      </p>
+                  </div>
+          </div>
       </div>
       
     <% } %>

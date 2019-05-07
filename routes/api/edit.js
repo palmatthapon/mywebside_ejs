@@ -37,6 +37,7 @@ router.post('/change',isLoggedIn, function (req, res){
   let data = {
       name: req.body.name,
       detail: req.body.detail,
+      status: (req.body.status=='in stock'?0:1),
       weight: req.body.weight,
       price: req.body.price,
       tag: req.body.tag

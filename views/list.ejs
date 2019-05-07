@@ -15,6 +15,8 @@
 <body>
 <% include partials/menu %>
 
+
+
 <div class="main container">
     <tr>
         <div class="container">
@@ -28,7 +30,7 @@
 
             
             <h1 class="text-left">
-                    item List
+                    item List <a href="/item/add" class="btn btn-warning glyphicon glyphicon-plus" role="button"></a>
             </h1>
             
         </div>
@@ -36,14 +38,22 @@
         <div class="container-fluid bg-3 text-center" id="item-list">
                 <% for(var i=0; i < items.length; i++) { %>
                   <div class="col-md-3 col-sm-4">
-                        <div class="thumbnail">
+                        <div class="thumbnail word-wrap">
                           <a href="/showitem?itemid=<%= items[i].item_id %>">
-                            <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="120" height="100%"/>
+                            <% if(items[i].status==1){%>
+                                <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="30%" height="30%"/>
+                              <%}%>
+                            <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="50%" height="100%"/>
                           </a>
                           <div class="caption">
-                            <a href="/showitem?itemid=<%= items[i].item_id %>"><h5><%= items[i].name %></h5></a>
+                            <a href="/showitem?itemid=<%= items[i].item_id %>"><h4><%= items[i].name %></h4></a>
+                            <p>post: 
+                                    <script>
+                                            getDate('<%= items[i].date %>');
+                                            </script>
+                                  </p>
                             <p>
-                                <a href="/item/edit?itemid=<%= items[i].item_id %>" class="btn btn-primary" role="button">Edit</a> 
+                                <a href="/item/edit?itemid=<%= items[i].item_id %>" class="btn btn-info" role="button">Edit</a> 
                                 <a href="/item/list/delete?itemid=<%= items[i].item_id %>" class="btn btn-danger glyphicon glyphicon-trash" role="button" onclick="return confirm('Are you sure?')"></a>
                             </p>
                         </div>

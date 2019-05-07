@@ -5,3 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="./stylesheets/style.css">
+
+<style>
+        img.img-on-img {
+            position: absolute;
+            /*left: 0px;
+            top: 0px;*/
+        }
+        div.word-wrap {
+            word-wrap: break-word;
+        }
+    </style>
+
+<script>
+        function getDate(n) {
+            var d = new Date(n);
+            document.write((d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear()+' at '+(d.getHours() > 12 ? d.getHours() - 12 : d.getHours())+':'+d.getMinutes()+' '+(d.getHours() >= 12 ? "PM" : "AM"));
+        }
+    </script>
