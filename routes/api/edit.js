@@ -33,11 +33,11 @@ router.post('/change',isLoggedIn, function (req, res){
   let connection = mysql.createConnection(config);
 
   let id = req.body.itemid;
-  
+  console.log('status edit '+req.body.status);
   let data = {
       name: req.body.name,
       detail: req.body.detail,
-      status: (req.body.status=='in stock'?0:1),
+      status: req.body.status,
       weight: req.body.weight,
       price: req.body.price,
       tag: req.body.tag

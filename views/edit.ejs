@@ -37,7 +37,7 @@
                         <label for="name1">
                             Head:
                         </label>
-                        <input class="form-control" id="name2" type="text" placeholder="name3" name="name" value="<%= item[0].name %>">
+                        <input class="form-control" id="name2" type="text" placeholder="name3" name="name" value="<%= item[0].name %>" required>
 
                     </div>
                     <div class="form-group">
@@ -64,40 +64,35 @@
                         <label for="detail">
                             Detail:       
                         </label>
-                        <textarea class="form-control" name="detail" placeholder="detail" rows="5" style="width:100%; height:150px;" value="<%= item[0].detail %>"></textarea>
+                        <textarea class="form-control" name="detail" placeholder="detail" rows="5" style="width:100%; height:150px;"  ><%= item[0].detail %></textarea>
                     </div>
                     <div class="form-group">
-                            <label for="detail">
+                            <label for="status">
                                     Status:       
                                 </label>
-                                <div class="btn-group">
-                                        <a class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" name="status">
-                                            <% if(item[0].status==0){%>in stock<%}else{%>out of stock<%} %> <span class="caret"></span>   
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                           <li><a >in stock</a></li>
-                                           <li><a >out of stock</a></li>  
-                                        </ul> 
-                                      </div>
+                                      <select class="form-control <%=(item[0].status==0)?'btn-danger':'btn-success'%>" name="status" id="status" onclick="dropdownclicked(event)">
+                                            <option class="btn-success" value="1" <% if(item[0].status==1){%>selected<%}%> >in stock</option>
+                                            <option class="btn-danger" value="0" <% if(item[0].status==0){%>selected<%}%> >out of stock</option>
+                                        </select>
 
                     </div>
                     <div class="form-group">
                         <label for="weight">
                             Weight:       
                         </label>
-                        <input class="form-control" id="weight" type="number" placeholder="kg." name="weight" value="<%= item[0].weight %>">
+                        <input class="form-control" id="weight" type="number" placeholder="kg." name="weight" value="<%= item[0].weight %>" >
                     </div>
                     <div class="form-group">
                         <label for="price">
                             Price:       
                         </label>
-                        <input class="form-control" id="price" type="number" placeholder="baht" name="price" value="<%= item[0].price %>">
+                        <input class="form-control" id="price" type="number" placeholder="baht" name="price" value="<%= item[0].price %>" >
                     </div>
                     <div class="form-group">
                             <label for="tag">
                                 Tag:       
                             </label>
-                            <input class="form-control" id="tag" type="text" placeholder="tag" name="tag" value="<%= item[0].tag %>">
+                            <input class="form-control" id="tag" type="text" placeholder="tag" name="tag" value="<%= item[0].tag %>" >
                         </div>
                     <button class="btn btn-primary " onclick="clicked(event)" type="submit">
                             Update
@@ -109,18 +104,6 @@
 </div>
 
 
-      
-<script>
-        function clicked(e)
-        {
-            if(!confirm('Are you sure?'))e.preventDefault();
-        }
-
-        $(".dropdown-menu li a").click(function(){
-            $(".btn:first-child").html($(this).text()+' <span class="caret"></span>');
-            $(".btn:first-child").val($(this).text());
-        });
-</script>
 
 </body>
 <% include partials/script %>

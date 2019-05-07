@@ -26,7 +26,7 @@
         <div class="container">
             
             <h1> 
-                <% if(itemShow[0].status==1){%>
+                <% if(itemShow[0].status==0){%>
                   <div class="alert alert-danger text-center" role="alert">OUT OF STOCK</div>
                 <%}%>
               <%= itemShow[0].name %> </h1>
@@ -34,14 +34,14 @@
         </div>
         <div class="w3-content" style="max-width:600px">
             <div class="thumbnail">
-                <% if(itemShow[0].status==1){%>
+                <% if(itemShow[0].status==0){%>
                   <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="15%" height="15%"/>
                 <%}%>
                 <% for(var i=0; i < picList.length; i++) { %>
                     <% if(i==0) { %>
-                        <img class="mySlides" src="/uploads/<%= picList[i] %>" style="width:100%">
+                        <img class="mySlides" src="/uploads/<%= picList[i] %>" style="width:75%">
                     <% } else { %>
-                        <img class="mySlides" src="/uploads/<%= picList[i] %>" style="width:100%;display:none">
+                        <img class="mySlides" src="/uploads/<%= picList[i] %>" style="width:75%;display:none">
                     <% } %>
                 <% } %>
               </div>
@@ -60,19 +60,21 @@
                 </div>
         </div>
         <div class="container">
-                        <div class="thumbnail">
-                                <h2> รายละเอียด: <%= itemShow[0].detail %> </h2>
-                                <h2> น้ำหนัก: <%= itemShow[0].weight %> kg. </h2>
-                                <h2> ราคา: <%= itemShow[0].price %> baht </h2>
-                                <p>Post: 
-                                    <script>
-                                        getDate('<%= itemShow[0].date %>');
-                                        </script>
-                                  </p>
-                                <button type="button" class="btn btn-default btn-lg">
-                                        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <%= itemShow[0].tag %>
-                                </button>
-                        </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2> รายละเอียด: <%= itemShow[0].detail %> </h2>
+                    <h2> น้ำหนัก: <%= itemShow[0].weight %> kg. </h2>
+                    <h2> ราคา: <%= itemShow[0].price %> baht </h2>
+                    <p>Post: 
+                        <script>
+                            getDate('<%= itemShow[0].date %>');
+                            </script>
+                      </p>
+                    <button type="button" class="btn btn-default btn-lg">
+                            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <%= itemShow[0].tag %>
+                    </button>
+                </div>
+              </div>
         </div>
             
 </div>    
@@ -84,10 +86,10 @@
       <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="thumbnail">
                 <a href="/showitem?itemid=<%= items[i].item_id %>">
-                  <% if(items[i].status==1){%>
+                  <% if(items[i].status==0){%>
                     <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="50%" height="50%"/>
                   <%}%>
-                    <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="100%" height="100%"/>
+                    <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="50%" height="50%"/>
                   </a>
                   <div class="caption">
                     <a href="/showitem?itemid=<%= items[i].item_id %>"><h4><%= items[i].name %></h4></a>

@@ -20,10 +20,10 @@
       <div class="col-md-3 col-sm-6 col-xs-12">
         <div class="thumbnail word-wrap">
                 <a href="/showitem?itemid=<%= items[i].item_id %>">
-                  <% if(items[i].status==1){%>
+                  <% if(items[i].status==0){%>
                     <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="50%" height="50%"/>
                   <%}%>
-                  <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="100%" height="100%"/>
+                  <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="50%" height="50%"/>
                 </a>
                 <div class="caption">
                     <a href="/showitem?itemid=<%= items[i].item_id %>"><h4><%= items[i].name %></h4></a>

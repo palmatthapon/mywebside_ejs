@@ -40,7 +40,7 @@
                   <div class="col-md-3 col-sm-4">
                         <div class="thumbnail word-wrap">
                           <a href="/showitem?itemid=<%= items[i].item_id %>">
-                            <% if(items[i].status==1){%>
+                            <% if(items[i].status==0){%>
                                 <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="30%" height="30%"/>
                               <%}%>
                             <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="50%" height="100%"/>

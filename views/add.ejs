@@ -3,6 +3,7 @@
 <head>
  <% include partials/head %>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
  <!--
     <style>
         body {
@@ -21,59 +22,69 @@
                     welcome to add item page
             </h1>
                 <!--upload form-->
-                <form id="uploadForm" enctype="multipart/form-data" action="add/submit" method="POST" >
+                <form id="uploadForm" enctype="multipart/form-data"  action="add/submit" method="POST" >
                     <div class="form-group">
                         <label for="name1">
                             Head:
                         </label>
-                        <input class="form-control" id="name2" type="text" placeholder="name3" name="name4">
+                        <input class="form-control" id="name2" type="text" placeholder="name3" name="name4" required>
 
                     </div>
                     <div class="form-group">
                         <label for="pic1">
                             Image1:        
                         </label>
-                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <input type="file" name="image" accept=".jpg,.png" required>
                         <label for="pic2">
                             Image2:        
                         </label>
-                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <input type="file" name="image" accept=".jpg,.png">
                         <label for="pic3">
                             Image3:        
                         </label>
-                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <input type="file" name="image" accept=".jpg,.png">
                         <label for="pic4">
                             Image4:        
                         </label>
-                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <input type="file" name="image" accept=".jpg,.png">
                         <label for="pic5">
                             Image5:        
                         </label>
-                        <input type="file" name="userPhoto" accept=".jpg,.png">
+                        <input type="file" name="image" accept=".jpg,.png">
                     </div>
                     <div class="form-group">
                         <label for="detail">
                             Detail:       
                         </label>
-                        <textarea class="form-control" name="detail" placeholder="detail" rows="5" style="width:100%; height:150px;"></textarea>
+                        <textarea class="form-control" name="detail" placeholder="detail" rows="5" style="width:100%; height:150px;" ></textarea>
+                    </div>
+                    <div class="form-group">
+                            <label for="status">
+                                    Status:       
+                                </label>
+                                <select class="form-control btn-success" name="status" id="status">
+                                        <option class="btn-success" value="1" selected >in stock</option>
+                                        <option class="btn-danger" value="0" >out of stock</option>
+                                    </select>
+
                     </div>
                     <div class="form-group">
                         <label for="weight">
                             Weight:       
                         </label>
-                        <input class="form-control" id="weight" type="number" placeholder="kg." name="weight">
+                        <input class="form-control" id="weight" type="number" placeholder="kg." name="weight" >
                     </div>
                     <div class="form-group">
                         <label for="price">
                             Price:       
                         </label>
-                        <input class="form-control" id="price" type="number" placeholder="baht" name="price">
+                        <input class="form-control" id="price" type="number" placeholder="baht" name="price" >
                     </div>
                     <div class="form-group">
                             <label for="tag">
                                 Tag:       
                             </label>
-                            <input class="form-control" id="tag" type="text" placeholder="tag" name="tag">
+                            <input class="form-control" id="tag" type="text" placeholder="tag" name="tag" >
                         </div>
                     <button class="btn btn-primary " onclick="clicked(event)" type="submit" >
                             Upload
@@ -84,12 +95,7 @@
     </tr>
 </div>
       
-<script>
-        function clicked(e)
-        {
-            if(!confirm('Are you sure?'))e.preventDefault();
-        }
-        </script>
+   
 
 </body>
 <% include partials/script %>
