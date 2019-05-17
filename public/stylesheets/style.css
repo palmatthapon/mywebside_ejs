@@ -35,3 +35,20 @@ color: #1abc9c !important;;
   position: relative;
   transform: translateX(50%);
 }
+
+
+img.img-on-img {
+  position: absolute;
+  /*left: 0px;
+  top: 0px;*/
+}
+div.word-wrap {
+  word-wrap: break-word;
+}
+
+.greenColor{
+background-color: #33CC33;
+}
+.redColor{
+background-color: #E60000;
+}

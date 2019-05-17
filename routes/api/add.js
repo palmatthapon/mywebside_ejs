@@ -82,7 +82,8 @@ let item = {
 
  connection.query('INSERT INTO items SET ?',item, function (err, resp) {
   if (err) throw err;
-  // if there are no errors send an OK message.
+  
+  connection.end();
   req.flash('success_messages','Uploading File Success')
   res.redirect('/item/list');
 });

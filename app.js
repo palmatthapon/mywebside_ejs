@@ -7,8 +7,9 @@ var moment = require('moment');
 
 var flash = require('connect-flash');
 
+
 //login web mysql
-var mysql = require('mysql');
+//var mysql = require('mysql');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 //end login
@@ -19,6 +20,8 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 
+app.use('/javascripts', express.static(__dirname + '/public/javascripts/'));
+app.use('/stylesheets', express.static(__dirname + '/public/stylesheets/'));
 
 //login web mysql
 app.use(session({
@@ -77,6 +80,14 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+
+
+let port = 5555;
+
+app.listen(port, function () {
+  console.log('Example app listening on port ' + port + '!');
 });
 
 module.exports = app;
