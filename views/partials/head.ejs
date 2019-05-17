@@ -1,5 +1,5 @@
 
-<title>Static Website | <%= page %></title>
+<title>ฟาร์มไก่ชน | <%= page %></title>
 <meta charset="utf-8">
 <meta name="active-menu" content="<%= menuId %>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,25 +7,3 @@
 
 <link rel="stylesheet" href="/stylesheets/style.css">
 
-
-<script>
-        function getDate(n) {
-            var d = new Date(n);
-            document.write((d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear()+' at '+(d.getHours() > 12 ? d.getHours() - 12 : d.getHours())+':'+d.getMinutes()+' '+(d.getHours() >= 12 ? "PM" : "AM"));
-        }
-
-        function dropdownclicked(e)
-        {
-            if (document.getElementById('status').value == '1') {
-                document.getElementById('status').className = 'form-control btn-success';
-            }else{
-                document.getElementById('status').className = 'form-control btn-danger';
-            }
-        }
-
-        function clicked(e)
-        {
-            if(!confirm('Are you sure?'))e.preventDefault();
-        }
-        
-    </script>

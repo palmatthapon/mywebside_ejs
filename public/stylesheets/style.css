@@ -1,6 +1,6 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0px;
+  font: 14px "Sarabun", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -16,19 +16,24 @@ a {
   padding-bottom: 70px;
 }
 .navbar {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   border: 0;
   border-radius: 0;
   margin-bottom: 0;
-  font-size: 12px;
-  letter-spacing: 5px;
+  font-size: 20px;
+  letter-spacing: 2px;
 }
+.navbar-nav>li>a {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .navbar-nav  li a:hover {
-  color: #1abc9c !important;
+  color: #F1C40F !important;
 }
 .active>a {
-color: #1abc9c !important;;
+color: #D4AC0D !important;;
 }
 
 .center{
@@ -51,4 +56,8 @@ background-color: #33CC33;
 }
 .redColor{
 background-color: #E60000;
+}
+
+.fontSarabun {
+  font: 'Sarabun';
 }
