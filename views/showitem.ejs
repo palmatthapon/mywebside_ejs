@@ -9,19 +9,33 @@
 </head>
 <body>
 <% include partials/menu %>
-<script src="/javascripts/getdate.js"></script>
+<link rel="stylesheet" href="/stylesheets/modalimages.css">
 
-<% var picList = [] %>
-<% if(itemShow[0].pic1!=null) { %>
-    <% picList[0] = itemShow[0].pic1 } %>
-<% if(itemShow[0].pic2!=null) { %>
-    <% picList[1] = itemShow[0].pic2 } %>
-<% if(itemShow[0].pic3!=null) { %>
-    <%picList[2] = itemShow[0].pic3 } %>
-<% if(itemShow[0].pic4!=null) { %>
-    <% picList[3] = itemShow[0].pic4 } %>
-<% if(itemShow[0].pic5!=null) { %>
-    <% picList[4] = itemShow[0].pic5 } %>
+<script src="/javascripts/getdate.js"></script>
+<script src="/javascripts/modalimages.js"></script>
+<script src="/javascripts/slideShow.js"></script>
+
+<% var picList = []
+  if(itemShow[0].pic1!=null) 
+  {
+    picList[0] = itemShow[0].pic1 
+  }
+  if(itemShow[0].pic2!=null) 
+  {
+    picList[1] = itemShow[0].pic2 
+  }
+  if(itemShow[0].pic3!=null) 
+  {
+    picList[2] = itemShow[0].pic3 
+  }
+  if(itemShow[0].pic4!=null) 
+  {
+    picList[3] = itemShow[0].pic4 
+  } 
+  if(itemShow[0].pic5!=null) 
+  { 
+    picList[4] = itemShow[0].pic5 
+  } %>
 
 <div class="container-fluid word-wrap" id="item-show">
         <div class="container">
@@ -40,21 +54,21 @@
                 <%}%>
                 <% for(var i=0; i < picList.length; i++) { %>
                     <% if(i==0) { %>
-                        <img class="mySlides" src="/uploads/<%= picList[i] %>" style="width:75%">
+                        <img id="imgShow<%= i+1 %>"class="mySlides" src="/uploads/<%= picList[i] %>" onclick="imgonclick('imgShow<%= i+1 %>')" style="height:420px" >
                     <% } else { %>
-                        <img class="mySlides" src="/uploads/<%= picList[i] %>" style="width:75%;display:none">
+                        <img id="imgShow<%= i+1 %>" class="mySlides" src="/uploads/<%= picList[i] %>" onclick="imgonclick('imgShow<%= i+1 %>')" style="height:420px;display:none">
                     <% } %>
                 <% } %>
               </div>
                 <div class="w3-row-padding w3-section">
                         <% for(var i=0; i < picList.length; i++) { %>
-                            <div class="w3-col s4">
+                            <div class="w3-col s4 text-center">
                                 <% if(i==0) { %>
                                     <img class="demo w3-opacity w3-opacity-off" src="/uploads/<%= picList[i] %>"
-                                    style="width:100%;cursor:pointer" onclick="currentDiv('<%= i+1 %>')" >
+                                    style="height:128px;cursor:pointer" onclick="currentDiv('<%= i+1 %>')" >
                                     <% } else { %>
                                       <img class="demo w3-opacity " src="/uploads/<%= picList[i] %>"
-                                    style="width:100%;cursor:pointer" onclick="currentDiv('<%= i+1 %>')" >
+                                    style="height:128px;cursor:pointer" onclick="currentDiv('<%= i+1 %>')" >
                                       <% } %>
                             </div>
                         <% } %>
@@ -79,6 +93,11 @@
         </div>
             
 </div>    
+
+<div id="myModal" class="modal">
+  <span class="close" onclick="imgShowClose(event)">&times;</span>
+  <img class="modal-content" id="img01">
+</div>
 
 
 <div class="container-fluid bg-3 text-center word-wrap">
@@ -105,28 +124,6 @@
       
     <% } %>
 </div>
-
-<script>
-    function currentDiv(n) {
-      showDivs(slideIndex = n);
-    }
-    
-    function showDivs(n) {
-      var i;
-      var x = document.getElementsByClassName("mySlides");
-      var dots = document.getElementsByClassName("demo");
-      if (n > x.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = x.length}
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-      }
-      x[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " w3-opacity-off";
-    }
-</script>
 
 </body>
 <% include partials/footer %>
