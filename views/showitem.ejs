@@ -49,9 +49,7 @@
         </div>
         <div class="w3-content" style="max-width:600px">
             <div class="thumbnail">
-                <% if(itemShow[0].status==0){%>
-                  <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="15%" height="15%"/>
-                <%}%>
+                
                 <% for(var i=0; i < picList.length; i++) { %>
                     <% if(i==0) { %>
                         <img id="imgShow<%= i+1 %>"class="mySlides" src="/uploads/<%= picList[i] %>" onclick="imgonclick('imgShow<%= i+1 %>')" style="height:420px" >
@@ -59,6 +57,10 @@
                         <img id="imgShow<%= i+1 %>" class="mySlides" src="/uploads/<%= picList[i] %>" onclick="imgonclick('imgShow<%= i+1 %>')" style="height:420px;display:none">
                     <% } %>
                 <% } %>
+
+                <% if(itemShow[0].status==0){%>
+                  <img class ="status" src="/images/outofstock.png" alt="Image"/>
+                <%}%>
               </div>
                 <div class="w3-row-padding w3-section">
                         <% for(var i=0; i < picList.length; i++) { %>
@@ -100,24 +102,19 @@
 </div>
 
 
-<div class="container-fluid bg-3 text-center word-wrap">
+<div class="container-fluid bg-3 text-center">
     <h3 class="text-left">อื่นๆที่ใกล้เคียง:</h3>
     <% for(var i=0; i < items.length; i++) { %>
-      <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="thumbnail">
+      <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="thumbnail word-wrap">
                 <a href="/showitem?itemid=<%= items[i].item_id %>">
-                  <% if(items[i].status==0){%>
-                    <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="50%" height="50%"/>
-                  <%}%>
-                    <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="50%" height="50%"/>
+                    <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image"/>
+                    <% if(items[i].status==0){%>
+                      <img class ="status" src="/images/outofstock.png" alt="Image" width="50%" height="50%"/>
+                    <%}%>
                   </a>
-                  <div class="caption">
+                  <div class="caption bottom">
                     <a href="/showitem?itemid=<%= items[i].item_id %>"><h4><%= items[i].name %></h4></a>
-                    <p>Post: 
-                        <script>
-                            getDate('<%= items[i].date %>');
-                            </script>
-                      </p>
                   </div>
           </div>
       </div>

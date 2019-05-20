@@ -18,22 +18,18 @@
 <div class="container-fluid bg-3 text-center" id="item-list">
     <h3 class="text-left">ไก่ทั้งหมด:</h3>
     <% for(var i=0; i < items.length; i++) { %>
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="col-md-2 col-sm-6 col-xs-12">
         <div class="thumbnail word-wrap">
                 <a href="/showitem?itemid=<%= items[i].item_id %>">
-                  <% if(items[i].status==0){%>
-                    <img class ="img-on-img" src="/images/outofstock.png" alt="Image" width="50%" height="50%"/>
-                  <%}%>
-                  <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" width="50%" height="50%"/>
+                  <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image"/>
+                  
                 </a>
-                <div class="caption">
-                    <a href="/showitem?itemid=<%= items[i].item_id %>"><h4><%= items[i].name %></h4></a>
-                    <p>post:
-                        <script>
-                            getDate('<%= items[i].date %>');
-                            </script>
-                      </p>
+                <div class="caption bottom ">
+                    <a href="/showitem?itemid=<%= items[i].item_id %>"><%= items[i].name %></a>
                 </div>
+                <% if(items[i].status==0){%>
+                  <img class ="status" src="/images/outofstock.png" alt="Image"/>
+                <%}%>
         </div>
       </div>
       
