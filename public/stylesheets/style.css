@@ -4,7 +4,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #424949;
 }
 
 .bg-3 { 
@@ -16,13 +16,17 @@ a {
   padding-bottom: 70px;
 }
 .navbar {
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border: 0;
   border-radius: 0;
   margin-bottom: 0;
-  font-size: 20px;
+  font-size: 18px;
   letter-spacing: 2px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+  background-color: #f8f8f8;
 }
 .navbar-nav>li>a {
   padding-top: 20px;
@@ -52,13 +56,22 @@ div.word-wrap {
 }
 
 .greenColor{
-background-color: #33CC33;
+background-color: #58D68D;
 }
 .redColor{
-background-color: #E60000;
+background-color: #EC7063;
 }
 
 .fontSarabun {
   font: 'Sarabun';
 }
 
+#logoutBtn.logoutBtn{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top-width: 1px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}

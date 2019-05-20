@@ -7,19 +7,23 @@
           <span class="icon-bar"></span>                        
         </button>
         <a class="" href="/item">
-          <img class ="img-circle" src="/images/logo.png" alt="Brand" width="60" height="60"/>
+          <img class ="img-circle" src="/images/logo.jpg" alt="Brand" width="60" height="60"/>
         </a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
           <li id="home"><a href="/">หน้าแรก</a></li>
+          <li id="home"><a href="/">ไก่หนุ่ม</a></li>
+          <li id="home"><a href="/">ไก่สาว</a></li>
+          <li id="home"><a href="/">ร่วมกิจกรรม</a></li>
           <li id="about"><a href="/about">ข้อมูลฟาร์ม</a></li>
           <li id="contact"><a href="/contact">ติดต่อฟาร์ม</a></li>
+          <li id="contact"><a href="/contact">แจ้งชำระเงิน</a></li>
           <%typeof user == 'undefined'%>
           <% if (locals.user) { %>
             <li id="profile" ><a href="/item/profile" class="glyphicon glyphicon-user ">โปรไฟล์</a></li>
             <li id="logout">
-              <a href="logout" class="btn btn-danger btn-lg">Logout</a>
+              <a href="logout" class="btn btn-danger btn-lg logoutBtn" id="logoutBtn">Logout</a>
             </li>
           <% } %>
         </ul>
