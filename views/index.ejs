@@ -15,7 +15,7 @@
       </div>
 </div>
 
-<div class="container-fluid bg-3 text-center" id="item-list">
+<div class="container bg-3 text-center" id="item-list">
     <h3 class="text-left">ไก่ทั้งหมด:</h3>
     <% for(var i=0; i < items.length; i++) { %>
       <div class="col-md-2 col-sm-6 col-xs-12">
@@ -34,7 +34,41 @@
       </div>
       
     <% } %>
+    
 </div>
+
+<div class="container text-center">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        <%if(pageselect==1){%>
+          <li class="page-item disabled">
+          <%}else{%>
+            <li class="page-item">
+            <% } %>
+            <% var prevpage = +pageselect-1; %>
+        <a class="page-link" href="/page?pagenumber=<%= prevpage %>" tabindex="-1">Previous</a>
+      </li>
+      <% for(var j=1; j <= maxpage; j++) { %>
+        <% if(j==pageselect){%>
+          <li class="page-item active"><a class="page-link" href="/page?pagenumber=<%= j %>"><%= j %></a></li>
+        <%}else{%>
+          <li class="page-item"><a class="page-link" href="/page?pagenumber=<%= j %>"><%= j %></a></li>
+        <% } %>
+      <% } %>
+      <%if(pageselect==maxpage){%>
+        <li class="page-item disabled">
+        <%}else{%>
+          <li class="page-item">
+          <% } %>
+          <% var nextpage = +pageselect+1; %>
+        <a class="page-link" href="/page?pagenumber=<%= nextpage %>" >Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+
 </body>
 <% include partials/footer %>
 

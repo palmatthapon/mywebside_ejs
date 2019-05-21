@@ -3,22 +3,12 @@
 <head>
  <% include partials/head %>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
- <!--
-    <style>
-        body {
-            padding-top: 80px;
-        }
-    </style>
- -->
  
 </head>
 <body>
 <% include partials/menu %>
-<script src="/javascripts/getdate.js"></script>
 
 
-<div class="main container">
-    <tr>
         <div class="container">
 
             <!-- show any messages that come back with authentication -->
@@ -34,8 +24,8 @@
             </h1>
             
         </div>
-
-        <div class="container-fluid bg-3 text-center" id="item-list">
+        <hr>
+        <div class="container bg-3 text-center" id="item-list">
                 <% for(var i=0; i < items.length; i++) { %>
                   <div class="col-md-2 col-sm-4">
                         <div class="thumbnail word-wrap">
@@ -60,8 +50,6 @@
                 <% } %>
             </div>
             
-    </tr>
-</div>
 
 
 </body>

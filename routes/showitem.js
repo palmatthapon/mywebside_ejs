@@ -8,12 +8,12 @@ module.exports = function(app)
         let config = require('../config');
         let connection = mysql.createConnection(config);
 
-        var item_id = req.query.itemid;
+        let item_id = req.query.itemid;
         console.log('item id = '+item_id);
 
         connection.query("SELECT * FROM items WHERE item_id = '"+item_id+"' LIMIT 1", function (err, item) {
             if (err) throw err;
-            connection.query("SELECT * FROM items WHERE tag = '"+item[0].tag+"'", function (err, results) {
+            connection.query("SELECT * FROM items WHERE tag = '"+item[0].tag+"' limit 12", function (err, results) {
                 if (err) throw err;
 
                 connection.end();
