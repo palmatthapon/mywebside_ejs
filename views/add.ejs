@@ -4,13 +4,7 @@
  <% include partials/head %>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
- <!--
-    <style>
-        body {
-            padding-top: 80px;
-        }
-    </style>
- -->
+
 </head>
 <body>
 <% include partials/menu %>
@@ -20,13 +14,13 @@
     <tr>
         <div class="col-md-6 col-md-offset-3">
             <h1 class="display-4 m-b-2">
-                    welcome to add item page
+                    เพิ่มสินค้า
             </h1>
                 <!--upload form-->
                 <form id="uploadForm" enctype="multipart/form-data"  action="add/submit" method="POST" >
                     <div class="form-group">
                         <label for="name1">
-                            Head:
+                            ชื่อสินค้า:
                         </label>
                         <input class="form-control" id="name2" type="text" placeholder="name3" name="name4" required>
 
@@ -86,6 +80,10 @@
                                 Tag:       
                             </label>
                             <input class="form-control" id="tag" type="text" placeholder="tag" name="tag" >
+                            <% for(var i=0; i < tags.length; i++) { %>
+                                <button type="button" onclick="clickTag('<%= tags[i].tag %>')" class="btn btn-outline-secondary glyphicon glyphicon-tag"><%= tags[i].tag %></button>
+                              <% } %>
+
                         </div>
                     <button class="btn btn-primary " onclick="clicked(event)" type="submit" >
                             Upload
@@ -95,8 +93,7 @@
             
     </tr>
 </div>
-      
-   
+     
 
 </body>
 <% include partials/script %>

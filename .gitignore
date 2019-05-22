@@ -3,4 +3,7 @@ public/videos/*
 public/uploads/*
 public/images/*
 *.json
+*.mp4
+*.jpg
+*.png
 !package.json
