@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <% include partials/head %> 
+</head>
+<body>
+<% include partials/menu %>
+<script src="/javascripts/getdate.js"></script>
+
+
+<div class="container-fluid bg-3">
+        <div class="col-lg-6 center">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search for..." id="search_field">
+                  <span class="input-group-btn">
+                      <a href="" onclick="this.href='search?max=<%= maxpage %>&search='+document.getElementById('search_field').value">
+                            <button  class="btn btn-default" type="button">ค้นหา</button>
+                      </a>
+                  </span>
+                </div><!-- /input-group -->
+              </div><!-- /.col-lg-6 -->
+            </div><!-- /.row -->
+</div>
+
+
+<div class="container bg-3 text-center" id="item-list">
+    <h3 class="text-left">รายการค้นหา: <%= wordsearch %></h3>
+    <% for(var i=0; i < items.length; i++) { %>
+      <div class="col-md-2 col-sm-6 col-xs-12">
+        <div class="thumbnail word-wrap">
+                <a href="/showitem?itemid=<%= items[i].item_id %>">
+                  <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image"/>
+                  
+                </a>
+                <div class="caption bottom ">
+                    <a href="/showitem?itemid=<%= items[i].item_id %>"><%= items[i].name %></a>
+                </div>
+                <% if(items[i].status==0){%>
+                  <img class ="status" src="/images/outofstock.png" alt="Image"/>
+                <%}%>
+        </div>
+      </div>
+      
+    <% } %>
+    
+</div>
+
+<div class="container text-center">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+
+                <% var prevpage = +pageselect-1; %>
+                <%if(pageselect==1){%>
+                    <li class="page-item disabled">
+                    <a class="page-link" href="" onclick="return false" tabindex="-1">Previous</a>
+                    </li>
+                    <%}else{%>
+                    <li class="page-item ">
+                    <a class="page-link" href="" onclick="this.href='search?max=<%= maxpage %>&search='+document.getElementById('search_field').value+'&pagenumber=<%= prevpage %>'" tabindex="-1">Previous</a>
+                    </li>
+                    <% } %>
+        
+            
+      <% for(var j=1; j <= maxpage; j++) { %>
+        <% if(j==pageselect){%>
+          <li class="page-item active"><a class="page-link" href="" onclick="this.href='search?max=<%= maxpage %>&search='+document.getElementById('search_field').value+'&pagenumber=<%= j %>'"><%= j %></a></li>
+        <%}else{%>
+          <li class="page-item"><a class="page-link" href="" onclick="this.href='search?max=<%= maxpage %>&search='+document.getElementById('search_field').value+'&pagenumber=<%= j %>'"><%= j %></a></li>
+        <% } %>
+      <% } %>
+
+      <% var nextpage = +pageselect+1; %>
+      <%if(pageselect==maxpage){%>
+        <li class="page-item disabled">
+                <a class="page-link" href="" onclick="return false" >Next</a>
+            </li>
+        <%}else{%>
+          <li class="page-item">
+                <a class="page-link" href="" onclick="this.href='search?max=<%= maxpage %>&search='+document.getElementById('search_field').value+'&pagenumber=<%= nextpage %>'" >Next</a>
+            </li>
+        <% } %>
+          
+        
+      
+    </ul>
+  </nav>
+</div>
+
+
+<% include partials/footer %>
+</body>
+<% include partials/script %>
+</html>

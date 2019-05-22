@@ -51,6 +51,8 @@ app.use((req, res, next) => {
 
 require("./routes/contact")(app);
 require("./routes/showitem")(app);
+require("./routes/taglist")(app);
+require("./routes/search")(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

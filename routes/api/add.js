@@ -30,8 +30,15 @@ function isLoggedIn(req, res, next) {
 
 /* additem page. */
 router.get('/', isLoggedIn,function(req, res, next) {
-    console.log('post method');
-    res.render("add",{page:'Add item', menuId:'additem', user: req.session.user});
+  let mysql  = require('mysql');
+  let config = require('../../config');
+  let connection = mysql.createConnection(config);
+    connection.query('SELECT tag FROM items GROUP BY tag', function getTag (err, tag) {
+      if (err) throw err;
+      console.log('tag have '+tag.length);
+      connection.end();
+      res.render("add",{page:'เพิ่มสินค้า', menuId:'additem',tags:tag, user: req.session.user});
+  });
 });
 
 router.post('/singleuploadimage', isLoggedIn, upload.single('userPhoto'),function(req, res) {

@@ -7,17 +7,6 @@
 <% include partials/menu %>
 <script src="/javascripts/getdate.js"></script>
 
-<%if(pageselect==1){%>
-  <div class="container-fluid bg-3">
-      <div class="container col-xs-6 center">
-          <div class="embed-responsive embed-responsive-16by9">
-            <video autoplay muted class="embed-responsive-item" controls="true" src="/videos/videopreview.mp4" type='video/mp4'></video>
-            </div>
-        </div>
-  </div>
-  <%}%>
-
-<hr>
 <div class="container bg-3 text-center" id="item-list">
     <h3 class="text-left">ไก่ทั้งหมด:</h3>
     <% for(var i=0; i < items.length; i++) { %>
@@ -43,32 +32,28 @@
 <div class="container text-center">
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end">
-
-        <% var prevpage = +pageselect-1; %>
         <%if(pageselect==1){%>
           <li class="page-item disabled">
-              <a class="page-link" href="" onclick="return false" tabindex="-1">Previous</a>
           <%}else{%>
             <li class="page-item">
-                <a class="page-link" href="/page?max=<%= maxpage %>&page=<%= prevpage %>" tabindex="-1">Previous</a>
             <% } %>
+            <% var prevpage = +pageselect-1; %>
+        <a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= prevpage %>" tabindex="-1">Previous</a>
       </li>
       <% for(var j=1; j <= maxpage; j++) { %>
         <% if(j==pageselect){%>
-          <li class="page-item active"><a class="page-link" href="/page?max=<%= maxpage %>&page=<%= j %>"><%= j %></a></li>
+          <li class="page-item active"><a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= j %>"><%= j %></a></li>
         <%}else{%>
-          <li class="page-item"><a class="page-link" href="/page?max=<%= maxpage %>&page=<%= j %>"><%= j %></a></li>
+          <li class="page-item"><a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= j %>"><%= j %></a></li>
         <% } %>
       <% } %>
-
-      <% var nextpage = +pageselect+1; %>
       <%if(pageselect==maxpage){%>
         <li class="page-item disabled">
-            <a class="page-link" href="" onclick="return false" >Next</a>
         <%}else{%>
           <li class="page-item">
-              <a class="page-link" href="/page?max=<%= maxpage %>&page=<%= nextpage %>" >Next</a>
           <% } %>
+          <% var nextpage = +pageselect+1; %>
+        <a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= nextpage %>" >Next</a>
       </li>
     </ul>
   </nav>

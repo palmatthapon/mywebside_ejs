@@ -93,6 +93,9 @@
                                 Tag:       
                             </label>
                             <input class="form-control" id="tag" type="text" placeholder="tag" name="tag" value="<%= item[0].tag %>" >
+                            <% for(var i=0; i < tags.length; i++) { %>
+                                <button type="button" onclick="clickTag('<%= tags[i].tag %>')" class="btn btn-outline-secondary glyphicon glyphicon-tag"><%= tags[i].tag %></button>
+                              <% } %>
                         </div>
                     <button class="btn btn-primary " onclick="clicked(event)" type="submit">
                             Update

@@ -30,7 +30,7 @@
                   <div class="col-md-2 col-sm-4">
                         <div class="thumbnail word-wrap">
                                 <p>
-                                        <a href="/item/edit?itemid=<%= items[i].item_id %>" class="btn btn-info" role="button">Edit</a> 
+                                        <a href="/item/edit?itemid=<%= items[i].item_id %>" class="btn btn-primary glyphicon glyphicon-edit" role="button"></a> 
                                         <a href="/item/list/delete?itemid=<%= items[i].item_id %>" class="btn btn-danger glyphicon glyphicon-trash" role="button" onclick="return confirm('Are you sure?')"></a>
                                     </p>
                           <a href="/showitem?itemid=<%= items[i].item_id %>">
@@ -40,7 +40,7 @@
                               <%}%>
                           </a>
                           <div class="caption bottom">
-                            <a href="/showitem?itemid=<%= items[i].item_id %>"><h4><%= items[i].name %></h4></a>
+                            <a href="/showitem?itemid=<%= items[i].item_id %>"><%= items[i].name %></a>
                             
                         </div>
                           
@@ -49,7 +49,42 @@
                   
                 <% } %>
             </div>
-            
+
+            <div class="container text-center">
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-end">
+
+                            <% var prevpage = +pageselect-1; %>
+                          <%if(pageselect==1){%>
+                            <li class="page-item disabled">
+                                    <a class="page-link" href="" onclick="return false" tabindex="-1">Previous</a>
+                            <%}else{%>
+                              <li class="page-item">
+                                    <a class="page-link" href="/item/list/page?max=<%= maxpage %>&page=<%= prevpage %>" tabindex="-1">Previous</a>
+                              <% } %>
+                        </li>
+                        <% for(var j=1; j <= maxpage; j++) { %>
+                          <% if(j==pageselect){%>
+                            <li class="page-item active"><a class="page-link" href="/item/list/page?max=<%= maxpage %>&page=<%= j %>"><%= j %></a></li>
+                          <%}else{%>
+                            <li class="page-item"><a class="page-link" href="/item/list/page?max=<%= maxpage %>&page=<%= j %>"><%= j %></a></li>
+                          <% } %>
+                        <% } %>
+
+                        <% var nextpage = +pageselect+1; %>
+                        <%if(pageselect==maxpage){%>
+                          <li class="page-item disabled">
+                            <a class="page-link" href="" onclick="return false">Next</a>
+                          <%}else{%>
+                            <li class="page-item">
+                            <a class="page-link" href="/item/list/page?max=<%= maxpage %>&page=<%= nextpage %>" >Next</a>
+                            <% } %>
+                            
+                          
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>     
 
 
 </body>

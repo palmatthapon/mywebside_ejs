@@ -9,17 +9,38 @@ function isLoggedIn(req, res, next) {
   res.redirect("/")
 }
 
+let max_page=1;
+
 router.get('/', isLoggedIn,(req, res) => {
   let mysql  = require('mysql');
   let config = require('../../config');
   let connection = mysql.createConnection(config);
-
-  connection.query('SELECT * FROM items',function selectItem(err, results, fields) {
+  connection.query('SELECT item_id FROM items',function checkMaxRow(err, row) {
     if (err) throw err;
-    // if there are no errors send an OK message.
-    res.render("list",{page:'Item list', menuId:'item-list',items:results, user: req.session.user });
+    max_page = parseInt(row.length/24)+((row.length%24)>0?1:0);
+    
+    connection.query('SELECT * FROM items limit 24',function getList(err, results) {
+      if (err) throw err;
+      connection.end();
+      res.render("list",{page:'จัดการรายการสินค้า', menuId:'itemlist',maxpage:max_page,pageselect:1,items:results, user: req.session.user });
+    });
   });
 })
+
+router.get('/page', function(req, res, next) {
+  
+  let mysql  = require('mysql');
+  let config = require('../../config');
+  let connection = mysql.createConnection(config);
+
+  let page_number = req.query.page;
+  let max_page = req.query.max;
+  connection.query('SELECT * FROM items limit ?,24',(24*page_number)-23,function selectItem(err, results, fields) {
+    if (err) throw err;
+    connection.end();
+    res.render("list",{page:'Item List', menuId:'list',maxpage:max_page,pageselect:page_number,items:results, user: req.session.user });
+  });
+});
 
 
 router.get('/delete',isLoggedIn, (req, res) => {

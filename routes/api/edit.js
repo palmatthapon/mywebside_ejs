@@ -19,11 +19,17 @@ router.get('/',isLoggedIn, (req, res) => {
         var item_id = req.query.itemid;
         console.log(item_id)
 
-        connection.query('SELECT * FROM items WHERE item_id = ?', item_id, function (err, item) {
-            if (err) throw err;
-            // if there are no errors send an OK message.
-            res.render("edit",{page:'Edit', menuId:'edititem',item:item, user: req.session.user});
-        });
+    connection.query('SELECT tag FROM items GROUP BY tag', function getTag (err, tag) {
+      if (err) throw err;
+      console.log('tag have '+tag.length);
+      connection.query('SELECT * FROM items WHERE item_id = ?', item_id, function (err, item) {
+        if (err) throw err;
+        connection.end();
+        res.render("edit",{page:'Edit', menuId:'edititem',tags:tag,item:item, user: req.session.user});
+    });
+  });
+
+        
 })
 
 //ฟังก์ชั่นแก้ไข้ไอเทม
