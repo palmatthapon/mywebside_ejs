@@ -32,13 +32,15 @@
 <div class="container text-center">
   <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end">
+
+        <% var prevpage = +pageselect-1; %>
         <%if(pageselect==1){%>
           <li class="page-item disabled">
+              <a class="page-link" href="" onclick="return false" tabindex="-1">Previous</a>
           <%}else{%>
             <li class="page-item">
+                <a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= prevpage %>" tabindex="-1">Previous</a>
             <% } %>
-            <% var prevpage = +pageselect-1; %>
-        <a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= prevpage %>" tabindex="-1">Previous</a>
       </li>
       <% for(var j=1; j <= maxpage; j++) { %>
         <% if(j==pageselect){%>
@@ -47,13 +49,15 @@
           <li class="page-item"><a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= j %>"><%= j %></a></li>
         <% } %>
       <% } %>
+
+      <% var nextpage = +pageselect+1; %>
       <%if(pageselect==maxpage){%>
         <li class="page-item disabled">
+            <a class="page-link" href="" onclick="return false" >Next</a>
         <%}else{%>
           <li class="page-item">
+              <a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= nextpage %>" >Next</a>
           <% } %>
-          <% var nextpage = +pageselect+1; %>
-        <a class="page-link" href="/taglist?tag=<%= menuId %>&pagenumber=<%= nextpage %>" >Next</a>
       </li>
     </ul>
   </nav>
