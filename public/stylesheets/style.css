@@ -112,7 +112,7 @@ background-color: #EC7063;
 .thumbnail .status {
   position: absolute;
   width: auto;
-  height: 30%;
+  height: 50%;
   left: unset;
   transform: unset;
   left: 0px;
@@ -171,4 +171,8 @@ footer {
 
 .pagination>li>a, .pagination>li>span {
   color: #212121;
+}
+
+.thumbnail.about{
+  height: 520px;
 }

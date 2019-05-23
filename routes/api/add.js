@@ -33,7 +33,7 @@ router.get('/', isLoggedIn,function(req, res, next) {
   let mysql  = require('mysql');
   let config = require('../../config');
   let connection = mysql.createConnection(config);
-    connection.query('SELECT tag FROM items GROUP BY tag', function getTag (err, tag) {
+    connection.query('SELECT tag FROM tags GROUP BY tag', function getTag (err, tag) {
       if (err) throw err;
       console.log('tag have '+tag.length);
       connection.end();
@@ -46,13 +46,14 @@ router.post('/singleuploadimage', isLoggedIn, upload.single('userPhoto'),functio
   res.send("Uploading File: " + JSON.stringify(req.file)+" name "+filename);
 });
 
-router.post('/submit', isLoggedIn, upload.array('image',5),function (req, res) {
+var cpUpload = upload.fields([{ name: 'image', maxCount: 5 }, { name: 'video', maxCount: 1 }])
+router.post('/submit', isLoggedIn, cpUpload,function (req, res) {
   let mysql  = require('mysql');
   let config = require('../../config');
-  let connection = mysql.createConnection(config);
+  let conn = mysql.createConnection(config);
 
-  let imageName = [];
-  req.files.forEach(element => {
+  let imageNames = [];
+  req.files['image'].forEach(element => {
     console.log(element.path);
 
     sharp(element.path).resize({ height: 680 }).toFile(element.destination+ 'h680-'+element.filename, function(err) {
@@ -69,31 +70,52 @@ router.post('/submit', isLoggedIn, upload.array('image',5),function (req, res) {
       }
       console.log('resize success: '+element.filename);
   });
-  imageName.push('h680-'+element.filename);
+  imageNames.push('h680-'+element.filename);
 })
 console.log('status add '+req.body.status);
 
+
 let item = {
   name: req.body.name4,
-  pic1: imageName[0],
-  pic2: imageName[1],
-  pic3: imageName[2],
-  pic4: imageName[3],
-  pic5: imageName[4],
+  image: imageNames[0],
+  video: req.files['video'][0].filename,
   detail: req.body.detail,
   status: req.body.status,
   weight: req.body.weight,
   price: req.body.price,
-  tag: req.body.tag
  }
+ var array = req.body.tag.split(",");
 
- connection.query('INSERT INTO items SET ?',item, function (err, resp) {
-  if (err) throw err;
-  
-  connection.end();
-  req.flash('success_messages','Uploading File Success')
-  res.redirect('/item/list');
-});
+ conn.query('INSERT INTO items SET ?',item, function (err, resp) {
+    if (err) throw err;
+      console.log("lastinserted "+resp.insertId);
+
+      var sqlImg = "INSERT INTO images (item_id, image) VALUES ?";
+      var imgs = [];
+
+      for( var i=1; i<imageNames.length; i++ ) {
+        imgs.push( [resp.insertId,imageNames[i]] );
+      }
+
+      conn.query(sqlImg, [imgs], function (err, resp) {
+        if (err) throw err;
+    
+      var sql = "INSERT INTO tags (item_id, tag) VALUES ?";
+      var values = [];
+
+      for( var i=0; i<array.length; i++ ) {
+        values.push( [resp.insertId,array[i]] );
+      }
+
+      conn.query(sql, [values], function (err, resp) {
+        if (err) throw err;
+    
+          conn.end();
+            req.flash('success_messages','Uploading File Success')
+            res.redirect('/item/list');
+      });
+    });
+  });
 
 });
 

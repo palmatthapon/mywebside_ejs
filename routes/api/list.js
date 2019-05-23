@@ -53,29 +53,51 @@ router.get('/delete',isLoggedIn, (req, res) => {
         console.log(item_id)
 
         
-        connection.query('SELECT * FROM items WHERE item_id = ? limit 1', item_id,function selectItem(err, results, fields) {
+        connection.query('SELECT * FROM items WHERE item_id = ?', item_id,function getItem(err, results) {
           if (err) throw err;
           
           const fs = require('fs');
-          let picList = [results[0].pic1,results[0].pic2,results[0].pic3,results[0].pic4,results[0].pic5];
-          picList.forEach(element => {
-            console.log('public/uploads/'+element);
-            if(element!=null){
-              fs.unlink('public/uploads/'+element, function (err) {            
-                if (err) {                                                 
-                    console.error(err);                                    
-                }                                                          
-                console.log('File has been Deleted');                           
-            }); 
-            }
-          });
-          connection.query('DELETE FROM items WHERE item_id = ?', item_id, function (err, item) {
+          let fileList = [];
+          fileList.push(results[0].image);
+
+          if(results[0].video){
+            fileList.push(results[0].video);
+          }
+
+          connection.query('SELECT * FROM images WHERE item_id = ?', item_id,function getImages(err, imgs) {
             if (err) throw err;
-            req.flash('success_messages','delete success!')
-            res.redirect("/item/list")
+            
+            imgs.forEach(element => {
+              fileList.push(element.image);
+            });
+
+            fileList.forEach(element => {
+              console.log('public/uploads/'+element);
+              if(element!=null){
+                fs.unlink('public/uploads/'+element, function (err) {            
+                  if (err) {                                                 
+                      console.error(err);                                    
+                  }                                                          
+                  console.log('File has been Deleted');                           
+                }); 
+              }
+            });
+          
+          connection.query('DELETE FROM images WHERE item_id = ?', item_id, function deleteImage (err, item) {
+            if (err) throw err;
+
+            connection.query('DELETE FROM tags WHERE item_id = ?', item_id, function deleteTag (err, item) {
+              if (err) throw err;
+
+              connection.query('DELETE FROM items WHERE item_id = ?', item_id, function deleteItem (err, item) {
+                if (err) throw err;
+                req.flash('success_messages','delete success!')
+                res.redirect("/item/list")
+              });
+            });
           });
         });
-
+      });
 })
 
 

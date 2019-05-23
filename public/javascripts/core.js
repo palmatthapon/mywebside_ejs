@@ -16,3 +16,18 @@ function clickTag(t){
     }
     
 }
+
+function addTags(t){
+    var inputTag = document.getElementById("tag");
+    inputTag.value  = "hhh";
+    if(inputTag.value.indexOf(t)!== -1){
+
+    }else{
+        if(inputTag.value == ''){
+            inputTag.value  = "aaa";
+        }else{
+            inputTag.value +=','+t;
+        }
+    }
+}
+

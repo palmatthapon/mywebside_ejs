@@ -90,9 +90,20 @@
                     </div>
                     <div class="form-group">
                             <label for="tag">
-                                Tag:       
+                                Tag:
                             </label>
-                            <input class="form-control" id="tag" type="text" placeholder="tag" name="tag" value="<%= item[0].tag %>" >
+                            
+                            <input class="form-control" id="tag" type="text" placeholder="tag" name="tag" value="">
+                            <% for(var i=0; i < itemtags.length; i++) { %>
+                                <% if(i!=0){%>
+                                    <script>
+                                        document.getElementById("tag").value +=',';
+                                        </script>
+                                  <%}%>
+                                <script>
+                                    document.getElementById("tag").value +='<%= itemtags[i].tag %>';
+                                </script>
+                              <% } %> 
                             <% for(var i=0; i < tags.length; i++) { %>
                                 <button type="button" onclick="clickTag('<%= tags[i].tag %>')" class="btn btn-outline-secondary glyphicon glyphicon-tag"><%= tags[i].tag %></button>
                               <% } %>

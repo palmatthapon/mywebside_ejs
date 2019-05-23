@@ -17,15 +17,18 @@ router.get('/',isLoggedIn, (req, res) => {
         let connection = mysql.createConnection(config);
 
         var item_id = req.query.itemid;
-        console.log(item_id)
 
-    connection.query('SELECT tag FROM items GROUP BY tag', function getTag (err, tag) {
+    connection.query('SELECT tag FROM tags GROUP BY tag', function getTag (err, tag) {
       if (err) throw err;
-      console.log('tag have '+tag.length);
+      console.log('tag total '+tag.length);
       connection.query('SELECT * FROM items WHERE item_id = ?', item_id, function (err, item) {
         if (err) throw err;
+        connection.query("SELECT tag FROM tags WHERE item_id = '"+item_id+"'", function getAllTagInItem (err, tagAll) {
+          if (err) throw err;
+          console.log('tag have '+tagAll.length);
         connection.end();
-        res.render("edit",{page:'Edit', menuId:'edititem',tags:tag,item:item, user: req.session.user});
+        res.render("edit",{page:'Edit', menuId:'edititem',tags:tag,item:item,itemtags:tagAll, user: req.session.user});
+      });
     });
   });
 
@@ -45,13 +48,12 @@ router.post('/change',isLoggedIn, function (req, res){
       detail: req.body.detail,
       status: req.body.status,
       weight: req.body.weight,
-      price: req.body.price,
-      tag: req.body.tag
+      price: req.body.price
      }
 
   connection.query('UPDATE items SET ? WHERE item_id = '+id,data, function (err, resp) {
       if (err) throw err;
-      // if there are no errors send an OK message.
+      
       req.flash('success_messages','Update item Success')
       res.redirect('/item/list');
     });

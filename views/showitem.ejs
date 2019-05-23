@@ -16,26 +16,19 @@
 <script src="/javascripts/slideShow.js"></script>
 
 <% var picList = []
-  if(itemShow[0].pic1!=null) 
+  if(itemShow[0].image!=null) 
   {
-    picList[0] = itemShow[0].pic1 
+    picList[0] = itemShow[0].image 
   }
-  if(itemShow[0].pic2!=null) 
-  {
-    picList[1] = itemShow[0].pic2 
+  for(var i=0; i < imagesShow.length; i++) {
+    picList[1+i] = imagesShow[i].image
   }
-  if(itemShow[0].pic3!=null) 
-  {
-    picList[2] = itemShow[0].pic3 
-  }
-  if(itemShow[0].pic4!=null) 
-  {
-    picList[3] = itemShow[0].pic4 
-  } 
-  if(itemShow[0].pic5!=null) 
+  var videoShow;
+  if(itemShow[0].video!=null) 
   { 
-    picList[4] = itemShow[0].pic5 
-  } %>
+    videoShow = itemShow[0].video 
+  } 
+  %>
 
 <div class="container word-wrap" id="item-show">
     <h1> 
@@ -53,10 +46,18 @@
                         <img id="imgShow<%= i+1 %>" class="mySlides" src="/uploads/<%= picList[i] %>" onclick="imgonclick('imgShow<%= i+1 %>')" style="display:none">
                     <% } %>
                 <% } %>
-
+                
                 <% if(itemShow[0].status==0){%>
                   <img class ="status" src="/images/outofstock.png" alt="Image" style="height:40%"/>
                 <%}%>
+                
+                <% if(videoShow){%>
+                  <div id="imgShow<%= picList.length %>" class="embed-responsive embed-responsive-16by9 mySlides" style="display:none">
+                      <video  autoplay muted class="embed-responsive-item "  controls="true" src="/uploads/<%= videoShow %>" type='video/mp4'></video>
+                  </div>
+                <%}%>
+                
+
               </div>
                 <div class="w3-row-padding w3-section">
                         <% for(var i=0; i < picList.length; i++) { %>
@@ -70,6 +71,13 @@
                                       <% } %>
                             </div>
                         <% } %>
+                        <% if(videoShow){%>
+                          <div class="w3-col s4 text-center">
+                              <img class="demo w3-opacity " src="/images/videoclick.png %>"
+                                  style="height:128px;cursor:pointer" onclick="currentDiv('<%= picList.length+1 %>')" >
+                          </div>
+                        <%}%>
+                        
                 </div>
         </div>
         <div class="container">
@@ -83,9 +91,12 @@
                             getDate('<%= itemShow[0].date %>');
                             </script>
                       </p>
-                    <button type="button" class="btn btn-default btn-lg">
-                            <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <%= itemShow[0].tag %>
-                    </button>
+                      <% for(var i=0; i < tags.length; i++) { %>
+                          <button type="button" class="btn btn-default btn-lg" onclick="window.location.href = '/taglist?tag=<%= tags[i].tag %>';">
+                              <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <%= tags[i].tag %>
+                          </button>
+                      <%}%>
+                    
                 </div>
               </div>
         </div>
@@ -104,7 +115,7 @@
       <div class="col-md-2 col-sm-6 col-xs-12">
           <div class="thumbnail word-wrap">
                 <a href="/showitem?itemid=<%= items[i].item_id %>">
-                    <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image"/>
+                    <img class ="" src="/uploads/<%= items[i].image %>" alt="Image"/>
                     
                   </a>
                   <div class="caption bottom">

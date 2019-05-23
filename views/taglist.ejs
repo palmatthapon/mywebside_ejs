@@ -8,12 +8,12 @@
 <script src="/javascripts/getdate.js"></script>
 
 <div class="container bg-3 text-center" id="item-list">
-    <h3 class="text-left">ไก่ทั้งหมด:</h3>
+    <h3 class="text-left"><%= menuId %>ทั้งหมด:</h3>
     <% for(var i=0; i < items.length; i++) { %>
       <div class="col-md-2 col-sm-6 col-xs-12">
         <div class="thumbnail word-wrap">
                 <a href="/showitem?itemid=<%= items[i].item_id %>">
-                  <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image"/>
+                  <img class ="" src="/uploads/<%= items[i].image %>" alt="Image"/>
                   
                 </a>
                 <div class="caption bottom ">

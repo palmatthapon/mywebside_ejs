@@ -34,7 +34,7 @@
                                         <a href="/item/list/delete?itemid=<%= items[i].item_id %>" class="btn btn-danger glyphicon glyphicon-trash" role="button" onclick="return confirm('Are you sure?')"></a>
                                     </p>
                           <a href="/showitem?itemid=<%= items[i].item_id %>">
-                            <img class ="" src="/uploads/<%= items[i].pic1 %>" alt="Image" />
+                            <img class ="" src="/uploads/<%= items[i].image %>" alt="Image" />
                             <% if(items[i].status==0){%>
                                 <img class ="status" src="/images/outofstock.png" alt="Image"/>
                               <%}%>
