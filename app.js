@@ -53,6 +53,7 @@ require("./routes/contact")(app);
 require("./routes/showitem")(app);
 require("./routes/taglist")(app);
 require("./routes/search")(app);
+require("./routes/event1")(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

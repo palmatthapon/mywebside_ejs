@@ -27,7 +27,7 @@ router.get('/', isLoggedIn,(req, res) => {
   });
 })
 
-router.get('/page', function(req, res, next) {
+router.get('/page', function(req, res) {
   
   let mysql  = require('mysql');
   let config = require('../../config');
@@ -91,6 +91,7 @@ router.get('/delete',isLoggedIn, (req, res) => {
 
               connection.query('DELETE FROM items WHERE item_id = ?', item_id, function deleteItem (err, item) {
                 if (err) throw err;
+                
                 req.flash('success_messages','delete success!')
                 res.redirect("/item/list")
               });

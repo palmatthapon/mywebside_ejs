@@ -6,7 +6,6 @@ html {
 body {
   position: relative;
   margin: 0;
-  padding-bottom: 6rem;
   min-height: 100%;
   font: 14px "Sarabun", Helvetica, Arial, sans-serif;
 }
@@ -141,14 +140,30 @@ background-color: #EC7063;
 }
 
 footer {
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;
   padding: 1rem;
   background-color: #212121;
-  text-align: center;
   color: white;
+}
+
+.footer-copyright {
+  padding: 1rem;
+  text-align: center;
+}
+
+.footer-left{
+  padding:10px;
+}
+
+.footer-right{
+  padding:10px;
+}
+
+.social{
+  right: 0px;
 }
 
 .w3-col.s4 {
@@ -175,4 +190,8 @@ footer {
 
 .thumbnail.about{
   height: 520px;
+}
+
+.thumbnail.numberSlot{
+  height: 80px;
 }

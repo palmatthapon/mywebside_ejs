@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <% include partials/head %> 
+</head>
+<body>
+<% include partials/menu %>
+<script src="/javascripts/getdate.js"></script>
+
+
+<hr>
+<% if(user!=null && slot.length ==0) { %>
+  <h1>login</h1>
+  <div class="main container-fluid">
+  <div class="col-md-6 col-md-offset-3">
+  <h1 class="display-4 m-b-2">
+      เพิ่มสินค้า
+</h1>
+  <!--upload form-->
+  <form id="uploadForm" enctype="multipart/form-data"  action="add/submit" method="POST" >
+      <div class="form-group">
+          <label for="name1">
+              ชื่อสินค้า:
+          </label>
+          <input class="form-control" id="name2" type="text" placeholder="name3" name="name4" required>
+
+      </div>
+      <div class="form-group">
+          <label for="pic1">
+              รูปที่1:        
+          </label>
+          <input type="file" name="image" accept=".jpg,.png" required>
+          <label for="pic2">
+              รูปที่2:        
+          </label>
+          <input type="file" name="image" accept=".jpg,.png">
+          <label for="pic3">
+              รูปที่3:        
+          </label>
+          <input type="file" name="image" accept=".jpg,.png">
+          <label for="pic4">
+              รูปที่4:        
+          </label>
+          <input type="file" name="image" accept=".jpg,.png">
+          <label for="pic5">
+              รูปที่5:        
+          </label>
+          <input type="file" name="image" accept=".jpg,.png">
+      </div>
+      <div class="form-group">
+              <label for="video">
+                  วิดีโอ:        
+              </label>
+              <input type="file" name="video" accept=".mp4,.mov">
+          </div>
+      
+      <div class="form-group">
+              <label for="status">
+                      สถานะ:       
+                  </label>
+                  <select class="form-control btn-success" name="status" id="status" onclick="dropdownclicked(event)">
+                          <option class="btn-success" value="1" selected >มีสินค้า</option>
+                          <option class="btn-danger" value="0" >สินค้าหมด</option>
+                      </select>
+
+      </div>
+      <div class="form-group">
+          <label for="start">
+              เริ่มที่เลข:     
+          </label>
+          <input class="form-control" id="start" type="number" placeholder="start" name="start" >
+      </div>
+      <div class="form-group">
+          <label for="end">
+              สิ้นสุดที่เลข:       
+          </label>
+          <input class="form-control" id="end" type="number" placeholder="end" name="end" >
+      </div>
+      
+      
+      <button class="btn btn-primary " onclick="clicked(event)" type="submit" >
+              อัพโหลด
+      </button>
+  </form>
+</div>
+</div>
+<%}%>
+
+<div class="container bg-3 text-center" id="item-list">
+    
+    <h3 class="text-left">เบอร์ทั้งหมด:</h3>
+    <% for(var i=0; i < slot.length; i++) { %>
+      <div class="col-md-1 col-sm-6 col-xs-12">
+        <div class="thumbnail numberSlot word-wrap">
+                <a href="#">
+                  <a href="#"><%= slot[i].number %></a>
+                  
+                </a>
+                <div class="caption bottom ">
+                    <a href="#"><%= slot[i].number %></a>
+                </div>
+                <% if(i%2==0){%>
+                  
+                <%}%>
+        </div>
+      </div>
+      
+    <% } %>
+    
+</div>
+
+
+
+
+</body>
+<% include partials/footer %>
+
+<% include partials/script %>
+</html>

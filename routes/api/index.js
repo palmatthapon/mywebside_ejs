@@ -40,17 +40,17 @@ router.post('/auth', function(req, res) {
         req.flash('error_messages','Incorrect Username and/or Password!')
         res.redirect("/item/login");
 			}			
-			res.end();
+			//res.end();
 		});
 	} else {
     req.flash('error_messages','Please enter Username and Password!')
     res.redirect("/item/login")
-    res.end();;
+    //res.end();;
 	}
 });
 
 //หน้าโปรไฟล์
-router.get('/profile', isLoggedIn, function (req, res) {
+router.get('/profile', function (req, res) {
   res.render('profile', {page:'Profile', menuId:'profile', user: req.session.user});
 });
 

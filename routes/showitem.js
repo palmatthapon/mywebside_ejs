@@ -37,13 +37,16 @@ module.exports = function(app)
                                 if(element.item_id != getId)
                                 arrayItemId.push( element.item_id);
                             });
-        
-                            connection.query("SELECT * FROM items WHERE item_id IN (?)",[arrayItemId], function getItemsUsedTag (err, results) {
-                                if (err) throw err;
-                                
-                                connection.end();
-                                res.render('showitem', {page:'Item', menuId:'item',itemShow:itemIsShow,imagesShow:imagesIsShow,tags:tagAll,items:results});
-                            });
+                            if(arrayItemId.length >0){
+                                connection.query("SELECT * FROM items WHERE item_id IN (?)",[arrayItemId], function getItemsUsedTag (err, results) {
+                                    if (err) throw err;
+                                    
+                                    connection.end();
+                                    res.render('showitem', {page:'Item', menuId:'item',itemShow:itemIsShow,imagesShow:imagesIsShow,tags:tagAll,items:results});
+                                });
+                            }else{
+                                res.render('showitem', {page:'Item', menuId:'item',itemShow:itemIsShow,imagesShow:imagesIsShow,tags:tagAll,items:0});
+                            }
                         });
                     }else{
                         connection.end();

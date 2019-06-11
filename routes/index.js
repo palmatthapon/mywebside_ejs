@@ -8,7 +8,7 @@ router.use('/item', route_api)
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   let mysql  = require('mysql');
   let config = require('../config');
   let connection = mysql.createConnection(config);
@@ -25,18 +25,18 @@ router.get('/', function(req, res, next) {
   
 });
 
-router.get('/page', function(req, res, next) {
+router.get('/page', function(req, res) {
   
   let mysql  = require('mysql');
   let config = require('../config');
-  let connection = mysql.createConnection(config);
+  let conn = mysql.createConnection(config);
 
   let page_number = req.query.page;
   let max_page = req.query.max;
 
-  connection.query('SELECT * FROM items limit ?,18',(18*page_number)-18,function selectItem(err, results, fields) {
+  conn.query('SELECT * FROM items limit ?,18',(18*page_number)-18,function selectItem(err, results, fields) {
     if (err) throw err;
-    connection.end();
+    conn.end();
     res.render("index",{page:'Home', menuId:'home',maxpage:max_page,pageselect:page_number,items:results, user: req.session.user});
   });
 });
@@ -44,9 +44,11 @@ router.get('/page', function(req, res, next) {
 
 
 
-router.get('/about', function(req, res, next) {
+router.get('/about', function(req, res) {
     res.render("about",{page:'About', menuId:'about'});
 });
+
+
 
 
 module.exports = router;

@@ -29,7 +29,7 @@ function isLoggedIn(req, res, next) {
 }
 
 /* additem page. */
-router.get('/', isLoggedIn,function(req, res, next) {
+router.get('/',function(req, res) {
   let mysql  = require('mysql');
   let config = require('../../config');
   let connection = mysql.createConnection(config);
@@ -41,13 +41,14 @@ router.get('/', isLoggedIn,function(req, res, next) {
   });
 });
 
-router.post('/singleuploadimage', isLoggedIn, upload.single('userPhoto'),function(req, res) {
+router.post('/singleuploadimage', upload.single('userPhoto'),function(req, res) {
   var filename = req.file.path;
   res.send("Uploading File: " + JSON.stringify(req.file)+" name "+filename);
 });
 
 var cpUpload = upload.fields([{ name: 'image', maxCount: 5 }, { name: 'video', maxCount: 1 }])
-router.post('/submit', isLoggedIn, cpUpload,function (req, res) {
+
+router.post('/submit', cpUpload,function (req, res) {
   let mysql  = require('mysql');
   let config = require('../../config');
   let conn = mysql.createConnection(config);
@@ -78,43 +79,45 @@ console.log('status add '+req.body.status);
 let item = {
   name: req.body.name4,
   image: imageNames[0],
-  video: req.files['video'][0].filename,
+  video: req.files['video']!=null?req.files['video'][0].filename!=null:'',
   detail: req.body.detail,
   status: req.body.status,
+  age: req.body.age,
   weight: req.body.weight,
   price: req.body.price,
  }
- var array = req.body.tag.split(",");
-
+ 
  conn.query('INSERT INTO items SET ?',item, function (err, resp) {
     if (err) throw err;
       console.log("lastinserted "+resp.insertId);
 
-      var sqlImg = "INSERT INTO images (item_id, image) VALUES ?";
-      var imgs = [];
-
-      for( var i=1; i<imageNames.length; i++ ) {
-        imgs.push( [resp.insertId,imageNames[i]] );
+      if(imageNames.length >1){
+        var sqlImg = "INSERT INTO images (item_id, image) VALUES ?";
+        var imgs = [];
+  
+        for( var i=1; i<imageNames.length; i++ ) {
+          imgs.push( [resp.insertId,imageNames[i]] );
+        }
+  
+        conn.query(sqlImg, [imgs], function (err, resp) {
+          if (err) throw err;
+        });
       }
-
-      conn.query(sqlImg, [imgs], function (err, resp) {
-        if (err) throw err;
-    
-      var sql = "INSERT INTO tags (item_id, tag) VALUES ?";
-      var values = [];
-
-      for( var i=0; i<array.length; i++ ) {
-        values.push( [resp.insertId,array[i]] );
+      if(req.body.tag!=''){
+        var tagArray = req.body.tag.split(",");
+        var sql = "INSERT INTO tags (item_id, tag) VALUES ?";
+        var values = [];
+  
+        for( var i=0; i<tagArray.length; i++ ) {
+          values.push( [resp.insertId,tagArray[i]] );
+        }
+        conn.query(sql, [values], function (err, resp) {
+          if (err) throw err;
+        });
       }
-
-      conn.query(sql, [values], function (err, resp) {
-        if (err) throw err;
-    
-          conn.end();
-            req.flash('success_messages','Uploading File Success')
-            res.redirect('/item/list');
-      });
-    });
+      conn.end();
+              req.flash('success_messages','Uploading File Success')
+              res.redirect('/item/list');
   });
 
 });
