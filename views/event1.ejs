@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
  <% include partials/head %> 
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <% include partials/menu %>
+<link rel="stylesheet" href="/stylesheets/modalimages.css">
 <script src="/javascripts/getdate.js"></script>
+<script src="/javascripts/modalimages.js"></script>
+<script src="/javascripts/slideShow.js"></script>
 
 
 <hr>
@@ -17,7 +22,7 @@
       เพิ่มสินค้า
 </h1>
   <!--upload form-->
-  <form id="uploadForm" enctype="multipart/form-data"  action="add/submit" method="POST" >
+  <form id="uploadForm" enctype="multipart/form-data"  action="addevent1" method="POST" >
       <div class="form-group">
           <label for="name1">
               ชื่อสินค้า:
@@ -47,12 +52,7 @@
           </label>
           <input type="file" name="image" accept=".jpg,.png">
       </div>
-      <div class="form-group">
-              <label for="video">
-                  วิดีโอ:        
-              </label>
-              <input type="file" name="video" accept=".mp4,.mov">
-          </div>
+      
       
       <div class="form-group">
               <label for="status">
@@ -86,6 +86,43 @@
 </div>
 <%}%>
 
+<div class="container word-wrap" id="item-show">
+    <h1>กิจกรรมประจำเดือน</h1>
+        <div class="w3-content" style="max-width:600px">
+            <div class="thumbnail">
+                
+                <% for(var i=0; i < imgShow.length; i++) { %>
+                    <% if(i==0) { %>
+                        <img id="img<%= i+1 %>"class="mySlides" src="/uploads/<%= imgShow[i].image %>" onclick="imgonclick('img<%= i+1 %>')"  >
+                    <% } else { %>
+                        <img id="img<%= i+1 %>" class="mySlides" src="/uploads/<%= imgShow[i].image %>" onclick="imgonclick('img<%= i+1 %>')" style="display:none">
+                    <% } %>
+                <% } %>
+                
+
+              </div>
+                <div class="w3-row-padding w3-section">
+                        <% for(var i=0; i < imgShow.length; i++) { %>
+                            <div class="w3-col s4 text-center">
+                                <% if(i==0) { %>
+                                    <img class="demo w3-opacity w3-opacity-off" src="/uploads/<%= imgShow[i].image %>"
+                                    style="height:128px;cursor:pointer" onclick="currentDiv('<%= i+1 %>')" >
+                                    <% } else { %>
+                                      <img class="demo w3-opacity " src="/uploads/<%= imgShow[i].image %>"
+                                    style="height:128px;cursor:pointer" onclick="currentDiv('<%= i+1 %>')" >
+                                      <% } %>
+                            </div>
+                        <% } %>
+                        
+                </div>
+        </div>
+</div>   
+
+<div id="myModal" class="modal">
+        <span class="close" onclick="imgShowClose(event)">&times;</span>
+        <img class="modal-content" id="img01">
+      </div>
+
 <div class="container bg-3 text-center" id="item-list">
     
     <h3 class="text-left">เบอร์ทั้งหมด:</h3>
@@ -97,7 +134,7 @@
                   
                 </a>
                 <div class="caption bottom ">
-                    <a href="#"><%= slot[i].number %></a>
+                    <a href="#">ว่าง</a>
                 </div>
                 <% if(i%2==0){%>
                   

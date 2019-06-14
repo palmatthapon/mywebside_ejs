@@ -73,13 +73,11 @@ router.post('/submit', cpUpload,function (req, res) {
   });
   imageNames.push('h680-'+element.filename);
 })
-console.log('status add '+req.body.status);
-
 
 let item = {
   name: req.body.name4,
   image: imageNames[0],
-  video: req.files['video']!=null?req.files['video'][0].filename!=null:'',
+  video: req.files['video']!=null?req.files['video'][0].filename:'',
   detail: req.body.detail,
   status: req.body.status,
   age: req.body.age,
